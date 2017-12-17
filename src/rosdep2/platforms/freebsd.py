@@ -72,7 +72,7 @@ def pkg_detect_single(p):
     return os.waitpid(pop.pid, 0)[1] == 0 # pkg info --exists returns 0 if pkg installed, 1 if not
 
 def pkg_info_detect(packages):
-    return [p for p in packages if pkg_info_detect_single(p)]
+    return [p for p in packages if pkg_detect_single(p)]
 
 class PkgAddInstaller(PackageManagerInstaller):
     """
