@@ -90,4 +90,4 @@ class PkgAddInstaller(PackageManagerInstaller):
         if not packages:
             return []
         else:
-            return [self.elevate_priv(['/usr/sbin/pkg', 'install' '-y'])+packages]
+            return [self.elevate_priv(['/usr/sbin/pkg', 'install', '-y'])+packages]
