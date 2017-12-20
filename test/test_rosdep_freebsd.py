@@ -30,11 +30,24 @@
 
 import os
 import traceback
-from mock import patch
+from mock import patch, Mock
 
 def get_test_dir():
     # not used yet
     return os.path.abspath(os.path.join(os.path.dirname(__file__), 'freebsd'))
+
+def test_pkg_detect():
+    from rosdep2.platforms.freebsd import pkg_detect
+
+    m = Mock()
+    m.return_value = ''
+
+    val = pkg_detect([], exec_fn=m)
+    assert val == [], val
+
+    val = pkg_detect(['tinyxml'], exec_fn=m)
+    assert val == [], val
+
 
 def test_PkgInstaller():
     from rosdep2.platforms.freebsd import PkgInstaller
