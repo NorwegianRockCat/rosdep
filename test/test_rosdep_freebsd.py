@@ -33,7 +33,6 @@ import traceback
 from mock import patch, Mock
 
 def get_test_dir():
-    # not used yet
     return os.path.abspath(os.path.join(os.path.dirname(__file__), 'freebsd'))
 
 def test_pkg_detect():
@@ -47,6 +46,11 @@ def test_pkg_detect():
 
     val = pkg_detect(['tinyxml'], exec_fn=m)
     assert val == [], val
+
+    with open(os.path.join(get_test_dir(), 'pkg-query-tinyxml-python2'), 'r') as f:
+        m.return_value = f.read()
+    val = pkg_detect(['no-pkg', 'tinyxml', 'python2'], exec_fn=m)
+    assert val == ['tinyxml', 'python'], val
 
 
 def test_PkgInstaller():
